@@ -1,28 +1,21 @@
 import { Component } from "react";
-import { Row, Form, Button } from "react-bootstrap";
-import axios from "axios";
-
-const basePlantUrl = "http://localhost:3000";
-const plantSearchUrl = `${basePlantUrl}/search`;
-// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-// axios.defaults.headers.post['Content-Type'] = 'application/json';
-// const headers = {
-//     "Access-Control-Allow-Origin": '*',
-// };
+import { Form, Button } from "react-bootstrap";
 
 class PlantSearch extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            searchTerm: '',
+            capturedSearchTerm: '',
             loading: false,
-            error: null
+            error: this.props.searchError
          }
+         this.props.plantSearchClient == null && console.log('plantSearchClient is null');
     }
 
-    setPlantSearchTerm = (event) => {
+    handleInputChange = (event) => {
+        event.preventDefault();
         this.setState({
-            searchTerm: event.target.value,
+            capturedSearchTerm: event.target.value,
             error: null
         });
     }
@@ -34,21 +27,16 @@ class PlantSearch extends Component {
             error: null
         });
 
-        const { setSearchPlants } = this.props
+        const { capturedSearchTerm } = this.state;
+        const { setSearchPlants, plantSearchClient } = this.props
 
-        axios.get(plantSearchUrl + "?q=" + this.state.searchTerm, {
-                headers: {
-                'Content-Type': 'application/json;charset=UTF-8',
-                // 'Access-Control-Allow-Origin': '*' // Could work and fix the previous problem, but not in all APIs
-                }
-            })
+       plantSearchClient.search(capturedSearchTerm)
             .then(response => {
-                console.log(response.data.data);
-                setSearchPlants(response.data.data);
+                setSearchPlants(capturedSearchTerm, response.data, response.meta.total);
             })
             .catch(error => {
-                this.setState({error: error.response.data});
                 console.log(error);
+                this.setState({error: 'There was an error searching for plants. Please try again.'});
             })
             .finally(() => {
                 this.setState({loading: false});
@@ -56,6 +44,7 @@ class PlantSearch extends Component {
     }
 
     render() {
+        const pClass = this.state.error ? "read-the-docs-error" : "read-the-docs";
         return ( 
             <form onSubmit={this.searchForPlants}>
                 <Form.Group style={{padding: 10}}>
@@ -63,12 +52,12 @@ class PlantSearch extends Component {
                     <Form.Control 
                         type="text" 
                         placeholder="Enter plant name"
-                        onChange={this.setPlantSearchTerm} />
+                        onChange={this.handleInputChange} />
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Search
                 </Button>
-                <p className="read-the-docs" style={{padding: 10}}>
+                <p className={pClass} style={{padding: 10}}>
                     {this.state.loading ? "Loading..." : 
                         this.state.error ? this.state.error : "Search for plants to add to your garden!" 
                     }

@@ -2,7 +2,7 @@ import { Component } from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Tab, Tabs } from 'react-bootstrap';
-import PlantSearchView from './Garden/PlantSearchView';
+import PlantSearchView from './Garden/SearchView/PlantSearchView';
 import PlantGardenView from './Garden/PlantGardenView';
 
 class App extends Component {

@@ -11,7 +11,7 @@ class PlantGardenView extends Component {
     }
 
     render() { 
-        console.log('my plants view: ', this.props.myPlants);
+        // console.log('my plants view: ', this.props.myPlants);
         return ( 
             <div>
                 <h2>Plants in my Garden</h2>

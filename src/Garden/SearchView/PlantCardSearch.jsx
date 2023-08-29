@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Button } from "react-bootstrap";
-import PlantCard from "./PlantCard";
+import PlantCard from "../PlantCard";
 
 class PlantCardSearch extends Component {
     constructor(props) {
