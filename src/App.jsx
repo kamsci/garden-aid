@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Tab, Tabs } from 'react-bootstrap';
 import PlantSearchView from './Garden/SearchView/PlantSearchView';
 import PlantGardenView from './Garden/PlantGardenView';
+import UserSelect from './User/UserSelect';
 
 class App extends Component {
   constructor(props) {
@@ -38,7 +39,10 @@ class App extends Component {
       <div className='flex-div'>
         <h1>Garden</h1>
         <div className='flex-div'>
-          <Tabs defaultActiveKey="view" id="uncontrolled-tab-example">
+          <Tabs defaultActiveKey="userSelect" id="uncontrolled-tab-example">
+            <Tab eventKey="userSelect" title="Users" className='tab'>
+              <UserSelect />
+            </Tab>
             <Tab eventKey="view" title="View" className='tab'>
               <PlantGardenView myPlants={myPlantsList} />
             </Tab>

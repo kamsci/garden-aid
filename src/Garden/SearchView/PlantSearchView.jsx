@@ -1,7 +1,6 @@
 import {Component} from 'react';
 import PlantSearch from './PlantSearch';
 import PlantSearchGallery from './PlantSearchGallery';
-import Plant from '../models/plant';
 import PaginationComponent from '../../HelperComponents/PaginationComponent';
 
 import PlantSearchClient from "../clients/plantSearchClient";
@@ -54,7 +53,7 @@ class PlantSearchView extends Component {
                 <hr/>
                 <PaginationComponent 
                     totalItems={this.state.totalPlants} 
-                    itemsPerPage={ITEMS_PER_PAGE}
+                    itemsPerPage={ITEMS_PER_PAGE} 
                     onPageChange={this.paginateSearchPlants} />
                 <PlantSearchGallery 
                     myPlants={this.props.myPlants} 

@@ -1,6 +1,6 @@
 'use strict';
 
-import BaseClient from "./baseClient";
+import BaseClient from "../../clients/baseClient";
 import Plant from "../models/plant";
 
 const basePlantUrl = "http://localhost:3000";

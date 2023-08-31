@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import PlantCardSearch from './PlantCardSearch';
-import {Container, Row, Col, Button } from 'react-bootstrap';
+import {Container, Row, Col } from 'react-bootstrap';
 
 class PlantSearchGallery extends Component {
     constructor(props) {
