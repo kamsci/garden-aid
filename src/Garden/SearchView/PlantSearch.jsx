@@ -32,7 +32,8 @@ class PlantSearch extends Component {
 
        plantSearchClient.search(capturedSearchTerm)
             .then(response => {
-                setSearchPlants(capturedSearchTerm, response.data, response.meta.total);
+                console.log('API Search: ', response);
+                setSearchPlants(capturedSearchTerm, response);
             })
             .catch(error => {
                 console.log(error);

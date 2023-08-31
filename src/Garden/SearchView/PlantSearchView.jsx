@@ -6,8 +6,6 @@ import PaginationComponent from '../../HelperComponents/PaginationComponent';
 import PlantSearchClient from "../clients/plantSearchClient";
 const plantSearchClient = new PlantSearchClient();
 
-const ITEMS_PER_PAGE = 20;
-
 class PlantSearchView extends Component {
     constructor(props) {
         super(props);
@@ -15,24 +13,32 @@ class PlantSearchView extends Component {
             searchTerm: '',
             searchPlants: [],
             totalPlants: 0,
+            itemsPerPage: 0,
+            lastPage: 0,
             paginationSearchError: null
         }
     }
     
-    setSearchPlants = (searchTerm, plantsData, totalPlants) => {
-        const searchPlants = PlantSearchClient.createPlantsFromJson(plantsData);
-        searchPlants && this.setState({searchTerm, searchPlants, totalPlants, searchError: null});
+    setSearchPlants = (searchTerm, response) => {
+        response && this.setState({
+            searchTerm, 
+            searchPlants: response.data, 
+            totalPlants: response.total, 
+            itemsPerPage: response.perPage,
+            lastPage: response.lastPage,
+            paginationSearchError: null
+        });
     }
 
     paginateSearchPlants = (page) => {
         console.log('paginateSearchPlants', page);
         plantSearchClient.search(this.state.searchTerm, page)
-        .then(response => this.handleResponse(response))
+        .then(response => this.handlePaginationResponse(response))
         .catch(error => { 
             console.log(error); 
             // Retry once
             plantSearchClient.search(this.state.searchTerm, page)
-                .then(response => this.handleResponse(response))
+                .then(response => this.handlePaginationResponse(response))
                 .catch(error => {
                     console.log(error);
                     this.setState({paginationSearchError: 'There was an error searching for plants. Please try again.'});
@@ -53,7 +59,8 @@ class PlantSearchView extends Component {
                 <hr/>
                 <PaginationComponent 
                     totalItems={this.state.totalPlants} 
-                    itemsPerPage={ITEMS_PER_PAGE} 
+                    itemsPerPage={this.state.itemsPerPage}
+                    lastPage={this.state.lastPage}
                     onPageChange={this.paginateSearchPlants} />
                 <PlantSearchGallery 
                     myPlants={this.props.myPlants} 
@@ -63,11 +70,15 @@ class PlantSearchView extends Component {
          );
     }
 
-    // Heler functions
-    handleResponse(response) {  
+    // Helper functions
+    handlePaginationResponse(response) {  
         console.log('paginateSearchPlants', response);
-        const searchPlants = PlantSearchClient.createPlantsFromJson(response.data);
-        searchPlants && this.setState({ searchPlants, searchError: null });
+        response && this.setState({ 
+            searchPlants: response.data, 
+            totalPlants: response.total, 
+            itemsPerPage: response.perPage,
+            lastPage: response.lastPage,
+            paginationSearchError: null });
     }
 }
 

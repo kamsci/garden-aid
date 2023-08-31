@@ -25,24 +25,23 @@ class PaginationComponent extends Component {
     }
 
     renderPages() {
-        const { totalItems, itemsPerPage } = this.props;
-        const numberOfPages = this.calculatePages(totalItems, itemsPerPage);
-        if (numberOfPages <= 5) {
-        return this.renderBasicPagination(numberOfPages);
+        const { totalItems, itemsPerPage, lastPage } = this.props;
+        if (lastPage <= 5) {
+        return this.renderBasicPagination(lastPage);
         }
-        return this.renderAdvancedPagination(numberOfPages);
+        return this.renderAdvancedPagination(lastPage);
     }
 
-    renderBasicPagination(numberOfPages) {
+    renderBasicPagination(lastPage) {
         let pages = [];
-        for (let i = 1; i <= numberOfPages; i++) {
+        for (let i = 1; i <= lastPage; i++) {
             pages.push(this.renderPaginationItem(i, i === this.state.activePage));
         }
         return pages;
     }
 
-    renderAdvancedPagination(numberOfPages) {
-        const middlePage = this.calculateMidPage(numberOfPages);
+    renderAdvancedPagination(lastPage) {
+        const middlePage = this.calculateMidPage(lastPage);
         const preMiddlePage = middlePage - 1;
         const postMiddlePage = middlePage + 1;
         const { activePage } = this.state;
@@ -59,8 +58,8 @@ class PaginationComponent extends Component {
       
             <Pagination.Ellipsis disabled />
             <Pagination.Next 
-                onClick={() => this.handlePageChange(activePage + 1 > numberOfPages ? numberOfPages : activePage + 1)}/>
-            <Pagination.Last onClick={() => this.handlePageChange(numberOfPages)}/>
+                onClick={() => this.handlePageChange(activePage + 1 > lastPage ? lastPage : activePage + 1)}/>
+            <Pagination.Last onClick={() => this.handlePageChange(lastPage)}/>
           </Pagination>
         )
     }
@@ -83,9 +82,9 @@ class PaginationComponent extends Component {
         return pages;
     }
 
-    calculateMidPage(numberOfPages) {
-        if (this.state.activePage === 1 || this.state.activePage === numberOfPages) {
-            return Math.floor(numberOfPages / 2);
+    calculateMidPage(lastPage) {
+        if (this.state.activePage === 1 || this.state.activePage === lastPage) {
+            return Math.floor(lastPage / 2);
         }
         return this.state.activePage;
     }

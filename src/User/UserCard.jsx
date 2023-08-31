@@ -18,7 +18,7 @@ class UserCard extends Component {
                 <Card.Body>
                     <Card.Title>{user.username}</Card.Title>
                     <Card.Text>
-                        <p><span>email: </span><span>{user.email}</span></p>
+                        <span>email: </span><span>{user.email}</span>
                     </Card.Text>
                     { isSelected 
                         ? <Button variant="disabled" disabled>Current User</Button> 

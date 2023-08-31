@@ -39,7 +39,7 @@ class App extends Component {
       <div className='flex-div'>
         <h1>Garden</h1>
         <div className='flex-div'>
-          <Tabs defaultActiveKey="userSelect" id="uncontrolled-tab-example">
+          <Tabs defaultActiveKey="userSelect" id="garden-nav">
             <Tab eventKey="userSelect" title="Users" className='tab'>
               <UserSelect />
             </Tab>
