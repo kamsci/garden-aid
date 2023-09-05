@@ -10,17 +10,18 @@ class PlantCardSearch extends Component {
 
     onClickPlant = (event) => {
         event.preventDefault();
+        console.log('PlantCardSearch.onClickPlant: ', this.props.plant);
         this.props.selectPlant(this.props.plant);
     }
 
     render() {
-        const { plant, isSelected, children } = this.props;
+        const { plant, isSelected, selectedGarden } = this.props;
         return (
             <PlantCard 
                 plant={plant} 
                 selectPlant={this.selectPlant}>
                     { isSelected 
-                        ? <Button variant="disabled" disabled>In Garden</Button> 
+                        ? <Button variant="disabled" disabled>{`In ${selectedGarden.name}`} </Button> 
                         : <Button variant="primary" onClick={this.onClickPlant}>Add to Garden</Button>
                     }
             </PlantCard>

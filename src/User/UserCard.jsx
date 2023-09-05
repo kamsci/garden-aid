@@ -12,7 +12,7 @@ class UserCard extends Component {
     }
 
     render() {
-        const { user, isSelected, selectUser } = this.props;
+        const { user, isSelected } = this.props;
         return (
             <Card id={user.id} style={{ width: '18rem' }}>
                 <Card.Body>

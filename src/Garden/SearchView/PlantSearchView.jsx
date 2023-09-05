@@ -47,25 +47,38 @@ class PlantSearchView extends Component {
     }
 
     render() { 
-        console.log('Total plants: ', this.state.totalPlants);
-        console.log('Plants: ', this.state.searchPlants);
+        // console.log('Total plants: ', this.state.totalPlants);
+        // console.log('Plants: ', this.state.searchPlants);
+        const { 
+            addPlantToGarden, 
+            selectedGarden, 
+            selectedGardenPlants,
+         } = this.props;
+        const { 
+            itemsPerPage,
+            lastPage,
+            paginationSearchError,
+            searchPlants, 
+            totalPlants,
+         } = this.state;
         return ( 
             <div>
                 <h2>Grow Your Garden</h2>
                 <PlantSearch
                     plantSearchClient={plantSearchClient}
                     setSearchPlants={this.setSearchPlants}
-                    searchError={this.state.paginationSearchError}/>
+                    searchError={paginationSearchError}/>
                 <hr/>
                 <PaginationComponent 
-                    totalItems={this.state.totalPlants} 
-                    itemsPerPage={this.state.itemsPerPage}
-                    lastPage={this.state.lastPage}
+                    totalItems={totalPlants} 
+                    itemsPerPage={itemsPerPage}
+                    lastPage={lastPage}
                     onPageChange={this.paginateSearchPlants} />
                 <PlantSearchGallery 
-                    myPlants={this.props.myPlants} 
-                    searchPlants={this.state.searchPlants}
-                    addToMyPlants={this.props.addToMyPlants} />
+                    myPlants={selectedGardenPlants} 
+                    searchPlants={searchPlants}
+                    selectedGarden={selectedGarden}
+                    addPlantToGarden={addPlantToGarden} />
             </div>
          );
     }

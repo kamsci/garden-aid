@@ -26,8 +26,26 @@
   flex-direction: column;
   flex-grow: 1;
 }
+
+.tracker-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  padding: 10px;
+  height: 10 rem;
+}
+
+.header-details {
+  margin-bottom: 0.5rem;
+}
+
 .tab {
   padding: 10px;
+}
+
+.error-display {
+  color: red;
 }
 
 a {

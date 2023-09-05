@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import {Container, Row, Col } from 'react-bootstrap';
+import {Container, Col } from 'react-bootstrap';
 import UserCard from './UserCard';
 
 import UserClient from './clients/userClient';
@@ -9,8 +9,6 @@ class UserSelect extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            users: [],
-            selectedUser: {},
             loading: false,
             error: null
         }
@@ -24,11 +22,11 @@ class UserSelect extends Component {
         this.setState({ loading: true });
         userClient.findAll()
         .then(response => { 
-            console.log(response);
+            // console.log(response);
             this.setState({
-                users: response || [],
                 error: null,
             });
+            this.props.setUsers(response);
         })    
         .catch(error => {
             console.log(error);
@@ -39,22 +37,21 @@ class UserSelect extends Component {
         });
     }
 
-    selectUser = (user) => {
-        this.setState({selectedUser: user});
-    }
 
     render() {
-        console.log('find users: ', this.state.users);
+        // console.log('find users: ', this.props.users);
+        // console.log('selected user: ', this.props.selectedUser)
+        const {users, selectUser, selectedUser} = this.props;
         return ( 
             <Container>
                 <Col>
-                    {this.state.users && this.state.users.map(user => {
-                        const isSelected = this.state.selectedUser.id == user.id;
+                    {users && users.map(user => {
+                        const isSelected = selectedUser?.id === user.id;
                         return (
                             <UserCard 
                                 key={user.id}
                                 user={user} 
-                                selectUser={this.selectUser}
+                                selectUser={selectUser}
                                 isSelected={isSelected} />
                         )
                     })}

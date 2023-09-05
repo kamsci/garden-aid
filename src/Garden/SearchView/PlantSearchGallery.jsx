@@ -8,18 +8,21 @@ class PlantSearchGallery extends Component {
     }
 
     render() { 
-        // console.log('my plants: ', this.props.myPlants);
-        console.log('search plants: ', this.props.searchPlants);
+        const { myPlants, selectedGarden, searchPlants, addPlantToGarden } = this.props;
+        // console.log('my plants: ', myPlants);
+        // console.log('search plants: ', searchPlants);
         return ( 
             <Container>
-                <Row>
-                    {this.props.searchPlants && this.props.searchPlants.map(plant => {
-                        const isSelected = this.props.myPlants.hasOwnProperty(plant.id);
+                <Row key="searchPlants">
+                    {searchPlants && searchPlants.map(plant => {
+                        const isSelected = myPlants.hasOwnProperty(plant.refId);
                         return (
-                            <Col key={plant.id}>
+                            <Col key={plant._id}>
                                 <PlantCardSearch 
+                                    key={plant.id}
                                     plant={plant} 
-                                    selectPlant={this.props.addToMyPlants}
+                                    selectedGarden={selectedGarden}
+                                    selectPlant={addPlantToGarden}
                                     isSelected={isSelected} />
                             </Col>
                         )

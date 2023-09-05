@@ -3,11 +3,11 @@
 import BaseClient from "../../clients/baseClient";
 import Plant from "../models/plant";
 
-const basePlantUrl = "http://localhost:3000";
+const baseUrl = import.meta.env.VITE_BASE_API_URL;
 
 export default class PlantSearchClient extends BaseClient {
     constructor() {
-        super(basePlantUrl, null);
+        super(baseUrl, null);
     }
 
     search(query, page) {
