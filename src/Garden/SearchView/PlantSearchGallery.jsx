@@ -9,7 +9,7 @@ class PlantSearchGallery extends Component {
 
     render() { 
         const { myPlants, selectedGarden, searchPlants, addPlantToGarden } = this.props;
-        // console.log('my plants: ', myPlants);
+        console.log('my plants: ', myPlants);
         // console.log('search plants: ', searchPlants);
         return ( 
             <Container>

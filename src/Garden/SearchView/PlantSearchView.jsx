@@ -47,7 +47,7 @@ class PlantSearchView extends Component {
     }
 
     render() { 
-        // console.log('Total plants: ', this.state.totalPlants);
+        console.log('PlantSearchView.render', this.props);
         // console.log('Plants: ', this.state.searchPlants);
         const { 
             addPlantToGarden, 

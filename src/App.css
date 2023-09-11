@@ -44,3 +44,7 @@
 .read-the-docs-error {
   color: maroon;
 }
+
+ul {
+  list-style: none;
+}

@@ -10,8 +10,9 @@ class PlantCardSearch extends Component {
 
     onClickPlant = (event) => {
         event.preventDefault();
-        console.log('PlantCardSearch.onClickPlant: ', this.props.plant);
-        this.props.selectPlant(this.props.plant);
+        const { plant, isSelected, selectedGarden, selectPlant } = this.props;
+        console.log('PlantCardSearch.onClickPlant: ', plant);
+        !isSelected && selectPlant(selectedGarden._id, plant);
     }
 
     render() {

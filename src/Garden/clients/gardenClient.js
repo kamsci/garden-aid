@@ -1,6 +1,6 @@
 'use strict';
 
-import BaseClient from "./baseClient";
+import BaseClient from "../../clients/baseClient";
 
 const baseUrl = import.meta.env.VITE_BASE_API_URL;
 
@@ -30,16 +30,6 @@ export default class GardenClient extends BaseClient {
         })
     }
 
-    addPlantToGarden(gardenId, plant) {
-        if (!gardenId) throw new Error("gardenId is required");
-        if (!plant) throw new Error("plantId is required");
-        return this.axiosInstance.post(`/gardens/${gardenId}/plants`, plant)
-        .then(response => { 
-            // console.log("received response from add plant to garden API", response);
-            return(response.data);
-        });
-    }
-
     deleteGarden(gardenId) {    
         if (!gardenId) throw new Error("gardenId is required");
         return this.axiosInstance.delete(`/gardens/${gardenId}`)
@@ -50,6 +40,16 @@ export default class GardenClient extends BaseClient {
     }
 
     // Plants in Gardens
+    addPlantToGarden(gardenId, plant) {
+        if (!gardenId) throw new Error("gardenId is required");
+        if (!plant) throw new Error("plantId is required");
+        return this.axiosInstance.post(`/gardens/${gardenId}/plants`, plant)
+        .then(response => { 
+            // console.log("received response from add plant to garden API", response);
+            return(response.data);
+        });
+    }
+
     findPlantsByGardenId(gardenId) {
         if (!gardenId) throw new Error("gardenId is required");
         return this.axiosInstance.get(`/gardens/${gardenId}/plants`)

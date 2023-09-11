@@ -10,6 +10,7 @@ class PlantGardenView extends Component {
         this.state = {
             showGardenForm: false,
          }
+         console.log('PlantGardenView: ', this.props);
     }
 
     handleOpenGardenForm = () => {
@@ -49,17 +50,6 @@ class PlantGardenView extends Component {
                     </Row>
                 </Container>
                 <hr />
-                <Container>
-                    <Row>
-                        {gardenPlantsList && gardenPlantsList.map(plant => {
-                            return (
-                                <Col key={plant._id}>
-                                    <PlantCard plant={plant} />
-                                </Col>
-                            )
-                        })}
-                    </Row>
-                </Container>
             </div>
          );
     }

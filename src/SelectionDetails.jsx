@@ -9,14 +9,14 @@ export default class SelectionDetails extends Component {
         return ( 
             <div className='tracker-header'>
                 <h3>
-                    { selectedUser.id && `Hello ${getUserName(selectedUser)}`
+                    { selectedUser._id && `Hello ${getUserName(selectedUser)}`
                     }
                 </h3>
-                <p>{ selectedUser.id 
+                <p>{ selectedUser._id 
                     ? selectedGarden.name
                         ? <><b>Working in: </b><span className='header-details'>{selectedGarden.name}</span></>
                         : 'Select a garden in the Garden tab' 
-                    : 'Please select a user'
+                    : 'Please login to view your gardens'
                 }</p>
             </div>
         );
