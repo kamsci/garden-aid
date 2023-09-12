@@ -1,33 +1,23 @@
-import { Component } from "react";
-import { Card, Button } from "react-bootstrap";
+import {Card, Button} from "react-bootstrap";
 
-class UserCard extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    onClickUser = (event) => {
+const UserCard = (props) => {
+    const {selectUser, user, isSelected} = props;
+    const onClickUser = (event) => {
         event.preventDefault();
-        this.props.selectUser(this.props.user);
+        selectUser(user);
     }
-
-    render() {
-        const { user, isSelected } = this.props;
-        return (
-            <Card id={user.id} style={{ width: '18rem' }}>
-                <Card.Body>
-                    <Card.Title>{user.username}</Card.Title>
-                    <Card.Text>
-                        <span>email: </span><span>{user.email}</span>
-                    </Card.Text>
-                    { isSelected 
-                        ? <Button variant="disabled" disabled>Current User</Button> 
-                        : <Button variant="dark" onClick={this.onClickUser}>Select User</Button>
-                    }
-                </Card.Body>
-            </Card>
-        );
-    }
+    return (
+        <Card id={user.id} style={{ width: '18rem' }}>
+            <Card.Body>
+                <Card.Title>{user.username}</Card.Title>
+                <Card.Text>
+                    <span>email: </span><span>{user.email}</span>
+                </Card.Text>
+                { isSelected 
+                    ? <Button variant="disabled" disabled>Current User</Button> 
+                    : <Button variant="dark" onClick={onClickUser}>Select User</Button>
+                }
+            </Card.Body>
+        </Card>
+    );
 }
-
-export default UserCard;

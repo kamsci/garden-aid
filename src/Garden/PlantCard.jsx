@@ -4,8 +4,7 @@ const PlantCard = (props) => {
 
     const {plant, children} = props;
 
-    const image = this.getImageUrl(plant.imageUrls);
-
+    
     const getImageUrl = (imageUrls) => {
         if (!imageUrls) return '';
         if (imageUrls.hasOwnProperty('thumbnailUrl')) {
@@ -18,6 +17,7 @@ const PlantCard = (props) => {
             return '';
         }
     }
+    const image = getImageUrl(plant.imageUrls);
 
     return (
         <Card id={plant.id} style={{ width: '18rem' }}>
