@@ -1,11 +1,13 @@
+import {Component } from 'react';
 import {Container, Row, Col } from 'react-bootstrap';
-import PlantCard from '../PlantCard';
+import PlantCard from './PlantCard';
 
-const PlantViewGallery = (props) => {
-    const { gardenPlants } = props;
+class PlantViewGallery extends Component {
 
-    return (
-        <Container>
+    render() { 
+        const { gardenPlants} = this.props;
+        return ( 
+            <Container>
                 <Row>
                     {gardenPlants && gardenPlants.map(plant => {
                         return (
@@ -17,8 +19,7 @@ const PlantViewGallery = (props) => {
                     })}
                 </Row>
             </Container>
-
-        );
+         );
+    }
 }
-
 export default PlantViewGallery;
