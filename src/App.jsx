@@ -56,6 +56,7 @@ const App = (props) => {
 		findPlantsInGarden(selectedGarden._id);
 	}, [selectedGarden]);
 
+// TODO: refactor dbUserError, sometimes it is an object..
 
   const defaultTab = isAuthenticated && isDbUserFound ? 'gardens' : 'profile';
   console.log('App', dbUser, gardens, selectedGarden);
@@ -67,9 +68,9 @@ const App = (props) => {
       { (isDbUserLoading || gardensLoading || gardenPlantsLoading) && <p>Loading...</p>}
       <div className='error-display'>
         <ul>
-          <li>{dbUserError}</li>
+          {/* <li>{JSON.stringify(dbUserError)}</li>
           <li>{gardensError}</li>
-          <li>{gardenPlantsError}</li>
+          <li>{gardenPlantsError}</li> */}
         </ul>
       </div>
         <Tabs defaultActiveKey={defaultTab} id="garden-nav">

@@ -13,7 +13,7 @@ class GardenFormModal extends Component {
             name: e.target.name.value,
             description: e.target.description.value,
         }
-        this.props.submitGardenForm(gardenDetails);
+        this.props.submitGardenForm(this.props.selectedUser._id, gardenDetails);
         this.props.handleClose();
     }
 
