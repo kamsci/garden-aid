@@ -19,7 +19,7 @@ const useGardens = () => {
           console.log('Gardens:', response);
           setGardens(response);
       })
-      .catch(error => setGardensError(error))
+      .catch(error => setGardensError(error?.message || "There was an error loading your gardens"))
       .finally(() => setGardensLoading(false));
     }
   }
@@ -30,7 +30,7 @@ const useGardens = () => {
       console.log('garden created', response);
       findGardens(dbUserId);
     })
-    .catch(error => setGardensError(error));
+    .catch(error => setGardensError(error?.message || "There was an error creating your garden"));
   }
 
   function selectGarden(garden) {
@@ -44,7 +44,7 @@ const useGardens = () => {
       gardenClient.deleteGarden(garden._id)
       .catch(error => { 
         console.log(error);
-        setGardensError(error);
+        setGardensError(error?.nessage || "There was an error deleting the garden. Please try again.");
       });
     } catch (error) {
       console.log(error);

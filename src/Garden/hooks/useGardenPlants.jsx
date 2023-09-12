@@ -23,7 +23,7 @@ const useGardenPlants = () => {
 				setGardenPlantsList(response);
 				setGardenPlants(arrayToMap(response, "refId"));
 			})
-			.catch(error => setGardenPlantsError(error))
+			.catch(error => setGardenPlantsError(error?.message || "There was an error loading your plants"))
 			.finally(() => setGardenPlantsLoading(false));
 		}
 	}
