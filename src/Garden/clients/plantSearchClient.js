@@ -10,17 +10,16 @@ export default class PlantSearchClient extends BaseClient {
         super(baseUrl, null);
     }
 
-    search(query, page) {
+    async search(query, page) {
         if (!query) throw new Error("query is required");
-        return this.axiosInstance.get('/search', {
+        const response = await this.axiosInstance.get('/search', {
             params: {
                 q: query,
                 page: page ? page : 1
             }
-        }).then(response => {
-            console.log("received response from API", response);
-            return(response.data);
-        })
+        });
+        console.log("received response from API", response);
+        return (response.data);
     }
 
     static createPlantFromJson(json) {
