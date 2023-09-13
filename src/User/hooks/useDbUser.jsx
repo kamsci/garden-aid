@@ -26,7 +26,7 @@ const useDbUser = () => {
               setDbUserError(null);
               setIsDbUserFound(false);
           } else {
-            setDbUserError('There was an error laoding the user.');
+            setDbUserError('There was an error loading the user.');
           }
       })
       .finally(() => {
