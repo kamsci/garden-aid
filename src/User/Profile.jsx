@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import ProfileView from "./ProvileView";
+import ProfileView from "./ProfileView"
 import ProfileForm from "./ProfileForm";
 
 const Profile = (props) => { 

@@ -1,38 +1,34 @@
-import {Component } from 'react';
-import { Card, Button, Row } from "react-bootstrap";
+import {Card, Button} from "react-bootstrap";
 
-class GardenCard extends Component {
+const GardenCard = (props) => {
+    // deconstructing these variables out of props to use. Do this when you want use more than one prop.
+    const {deleteGarden, isSelected, selectGarden, garden} = props;
 
-    onClickUser = (event) => {
+    const onClickUser = (event) => {
         event.preventDefault();
-        this.props.selectGarden(this.props.garden);
+        selectGarden(garden);
     }
 
-    onClickDelete = (event) => {
+    const onClickDelete = (event) => {
         event.preventDefault();
-        this.props.deleteGarden(this.props.garden);
+        deleteGarden(garden);
     }
-
-    render() { 
-        const { garden, isSelected } = this.props;
-        return ( 
-            <Card id={garden._id} style={{ width: '18rem' }}>
-                <Card.Body>
-                    <Card.Title>{garden.name}</Card.Title>
-                    <Card.Text>
-                        {garden.description}
-                    </Card.Text>
-                    <p>
-                    { isSelected 
-                        ? <Button variant="disabled" disabled>Current Garden</Button> 
-                        : <Button variant="dark" onClick={this.onClickUser}>Select Garden</Button>
-                    }
-                    </p>
-                    <Button variant="danger" onClick={this.onClickDelete}>Delete Garden</Button>
-                </Card.Body>
-            </Card>
-         );
-    }
+    return (
+        <Card id={garden._id} style={{ width: '18rem' }}>
+        <Card.Body>
+            <Card.Title>{garden.name}</Card.Title>
+            <Card.Text>
+                {garden.description}
+            </Card.Text>
+            <p>
+            { isSelected 
+                ? <Button variant="disabled" disabled>Current Garden</Button> 
+                : <Button variant="dark" onClick={onClickUser}>Select Garden</Button>
+            }
+            </p>
+            <Button variant="danger" onClick={onClickDelete}>Delete Garden</Button>
+        </Card.Body>
+    </Card>
+ );
 }
-
 export default GardenCard;
