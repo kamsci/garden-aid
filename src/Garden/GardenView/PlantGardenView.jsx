@@ -33,8 +33,11 @@ const PlantGardenView = (props) => {
             
             <Container>
                 <Row>
+                    
                     {gardens && gardens.map(garden => {
+            
                         return (
+                            
                             <Col key={garden._id}>
                                 <GardenCard 
                                     garden={garden}

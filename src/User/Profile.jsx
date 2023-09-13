@@ -4,7 +4,7 @@ import ProfileForm from "./ProfileForm";
 
 const Profile = (props) => { 
 	const { isAuthenticated } = useAuth0();
-	const {dbUser, isDbUserFound, isDbUserLoading, dbUserError } = props;
+	const {dbUser, isDbUserFound, isDbUserLoading, dbUserError, saveDbUser} = props;
 
 	return (
 			<div>
@@ -13,7 +13,8 @@ const Profile = (props) => {
 					{dbUserError && <p>{dbUserError}</p>}
 					{isDbUserFound 
 						? <ProfileView dbUser={dbUser} />
-						: isAuthenticated && <ProfileForm dbUser={dbUser} />
+						: isAuthenticated && <ProfileForm dbUser={dbUser}
+						 saveDbUser={saveDbUser}/>
 					}
 			</div>
 	)

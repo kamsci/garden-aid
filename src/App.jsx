@@ -26,7 +26,8 @@ const App = (props) => {
     dbUser, 
     dbUserError, 
     isDbUserLoading, 
-    isDbUserFound } = useDbUser();
+    isDbUserFound,
+    saveDbUser } = useDbUser();
   // Hook to manage user gardens when selected user is set
   const { 
     createGarden,
@@ -50,7 +51,8 @@ const App = (props) => {
 
 
   useEffect(() => {
-    findGardens();
+    findGardens(dbUser._id);
+    console.log("these are the gardens: " + gardens);
   }, [dbUser]);
 
   useEffect(() => {
@@ -90,6 +92,7 @@ const App = (props) => {
           dbUserError={dbUserError}
           isDbUserLoading={isDbUserLoading}
           isDbUserFound={isDbUserFound}
+          saveDbUser={saveDbUser}
           />
         </Route> 
         )}
