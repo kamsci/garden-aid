@@ -44,7 +44,7 @@ const PlantSearchView = (props) => {
     //helper function
     const handlePaginationResponse = (response) => {  
         console.log('paginateSearchPlants', response);
-        if (response !== null){
+        if (response){
             setSearchTerm(searchTerm);
             setSearchPlants(response.data);
             setTotalPlants(response.total); 
