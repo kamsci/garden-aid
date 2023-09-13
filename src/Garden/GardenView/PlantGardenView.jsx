@@ -11,7 +11,7 @@ const PlantGardenView = (props) => {
             selectGarden, deleteGarden, gardens}
              = props;
 
-    const [ShowGardenForm, setShowGardenForm] = useState([false]);
+    const [ShowGardenForm, setShowGardenForm] = useState(false);
 
     const handleOpenGardenForm = () => {
         setShowGardenForm(true);

@@ -1,53 +1,26 @@
 import React from "react";
+import Auth0Button from './HelperComponents/Auth0Button';
+import {Link} from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { useOktaAuth } from "@okta/okta-react";
-import { Navbar, Nav, Form, Button } from "react-bootstrap";
+// import { useOktaAuth } from "@okta/okta-react";
+import { Navbar, Nav, Container, Form, Button } from "react-bootstrap";
 
 const Header = () => {
-    // const history = useHistory();
-    const { oktaAuth, authState } = useOktaAuth();
 
-  const login = async () => oktaAuth.signInWithRedirect();
-    const logout = async () => oktaAuth.signOut('/');
-    // const login = async () => {
-    //     history.push('/login');
-    //     console.log( "login", history );
-    // }
-
-    if (!authState || authState.isPending) {
-        return <div>Loading...</div>;
-    }
-    
     return (
-        <Nav variant="underline" className="justify-content-end" defaultActiveKey="/">
-            <Nav.Item>
-                <Nav.Link href="/">Welcome</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link href="/gardens" eventKey="link-1">Gardens</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-            {authState && authState.isAuthenticated
-                ? <Button variant="secondary" onClick={logout}>Logout</Button>
-                : <Button variant="secondary" onClick={login}>Login</Button>}
-            </Nav.Item>
-        </Nav>
-    )
+        <>
+          <Navbar bg="dark" data-bs-theme="dark">
+            <Container>
+              <Nav className="me-auto">
+              <Auth0Button/>
+                <Nav.Link style={{color: 'white'}} href="/">Home</Nav.Link>
+                <Nav.Link style={{color: 'white'}} href="/garden">Garden</Nav.Link>
+                <Nav.Link style={{color: 'white'}} href="/profile">Profile</Nav.Link>
+              </Nav>
+            </Container>
+          </Navbar>
+        </>
+    );
 
-    // return (
-    //     <Navbar bg="light" expand="lg">
-    //     <Navbar.Brand href="/">Garden Aid</Navbar.Brand>
-    //     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    //     <Navbar.Collapse id="basic-navbar-nav">
-    //         <Nav className="mr-auto">
-    //         <Nav.Link href="/">Home</Nav.Link>
-    //         <Nav.Link href="/gardens">Gardens</Nav.Link>
-    //         </Nav>
-    //         <Form inline>
-    //         {button}
-    //         </Form>
-    //     </Navbar.Collapse>
-    //     </Navbar>
-    // );
 };
 export default Header;

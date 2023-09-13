@@ -1,3 +1,4 @@
+import Header from './Header';
 import { useEffect } from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -6,7 +7,11 @@ import PlantSearchView from './Garden/SearchView/PlantSearchView';
 import PlantGardenView from './Garden/GardenView/PlantGardenView';
 import SelectionDetails from './SelectionDetails';
 import Profile from './User/Profile';
+import Home from './Home'; 
+import Auth0Button from './HelperComponents/Auth0Button';
 
+
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import useDbUser from './User/hooks/useDbUser';
 import useGardens from './Garden/hooks/useGardens';
@@ -61,8 +66,11 @@ const App = (props) => {
   const defaultTab = isAuthenticated && isDbUserFound ? 'gardens' : 'profile';
   console.log('App', dbUser, gardens, selectedGarden);
   return (
+    
+    <Router>
     <div className='flex-div'>
       <h1>Garden Tracker</h1>
+      <Header/>
       <SelectionDetails selectedUser={dbUser} selectedGarden={selectedGarden} />
       <div className='flex-div'>
       { (isDbUserLoading || gardensLoading || gardenPlantsLoading) && <p>Loading...</p>}
@@ -73,51 +81,45 @@ const App = (props) => {
           <li>{gardenPlantsError}</li> */}
         </ul>
       </div>
-        <Tabs defaultActiveKey={defaultTab} id="garden-nav">
-          <Tab eventKey="profile" title="Profile" className='tab'>
-            <Profile
-              dbUser={dbUser} 
-              dbUserError={dbUserError}
-              isDbUserLoading={isDbUserLoading}
-              isDbUserFound={isDbUserFound}
-            />
-          </Tab>
-          <Tab 
-            eventKey="gardens" 
-            title="Gardens" 
-            className='tab' 
-            disabled={!isAuthenticated}>
-            <PlantGardenView 
+      <Switch>
+        <Route exact path="/" component={Home} />
+        {isAuthenticated && (
+          <Route exact path="/profile">
+          <Profile
+          dbUser={dbUser} 
+          dbUserError={dbUserError}
+          isDbUserLoading={isDbUserLoading}
+          isDbUserFound={isDbUserFound}
+          />
+        </Route> 
+        )}
+        {isAuthenticated && isDbUserFound &&(
+        <>
+          <Route exact path="/garden">
+            <PlantGardenView
               gardens={gardens}
               gardenPlantsList={gardenPlantsList}
               selectedUser={dbUser}
               selectedGarden={selectedGarden}
               submitGardenForm={createGarden}
               selectGarden={selectGarden}
-              deleteGarden={deleteGarden} />
-          </Tab>
-          <Tab 
-            eventKey="search" 
-            title="Search" 
-            className='tab'
-            disabled={!isAuthenticated}>
-            <PlantSearchView 
+              deleteGarden={deleteGarden}
+            />
+          </Route>
+          <Route exact path="/search">
+            <PlantSearchView
               selectedGarden={selectedGarden}
               selectedGardenPlants={gardenPlants} 
-              addPlantToGarden={addPlantToGarden} />
-          </Tab>
-        </Tabs>
+              addPlantToGarden={addPlantToGarden}
+            />
+          </Route> 
+        </>
+        )}
+      </Switch>
       </div>
     </div>
-  )
+  </Router>
+  );
 }
 
-export default App
-
-
-  // <a href="https://vitejs.dev" target="_blank">
-  //         <img src={viteLogo} className="logo" alt="Vite logo" />
-  //       </a>
-  //       <a href="https://react.dev" target="_blank">
-  //         <img src={reactLogo} className="logo react" alt="React logo" />
-  //       </a>
+export default App;
