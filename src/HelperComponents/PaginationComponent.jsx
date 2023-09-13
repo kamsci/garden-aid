@@ -30,7 +30,6 @@ const PaginationComponent = (props) => {
         const middlePage = calculateMidPage(lastPage);
         const preMiddlePage = middlePage - 1;
         const postMiddlePage = middlePage + 1;
-        activePage; 
         return (
             <Pagination>
             <Pagination.First onClick={() => handlePageChange(1)}/>
