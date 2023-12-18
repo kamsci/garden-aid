@@ -6,8 +6,9 @@ import App from './App.jsx'
 
 import './index.css'
 
-const baseDomain = import.meta.env.VITE_OKTA_URL_BASE;
-const clientId = import.meta.env.VITE_OKTA_CLIENTID;
+const baseDomain = import.meta.env.VITE_AUTH_DOMAIN_BASE;
+const clientId = import.meta.env.VITE_AUTH_CLIENTID;
+const appBaseUrl = import.meta.env.VITE_APP_BASE_URL;
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -16,7 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         domain={baseDomain}
         clientId={clientId}
         authorizationParams={{
-          redirect_uri: window.location.origin
+          redirect_uri: appBaseUrl,
         }}
       >
         <App />

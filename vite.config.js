@@ -5,20 +5,14 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [react()],
   server: {
-    // proxy: {
-    //   '/api': {
-    //     target: "http://localhost:5173",
-    //     changeOrigin: true,
-    //     secure: false,
-    //     rewrite: path => path.replace('/api', ''),
-    //   }
-    // }
-    // origin: '*'
-    // origin: 'http://127.0.0.1:5173',
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://localhost:5173',
-    //   }
-    // }
+    watch: {
+      usePolling: true,
+    },
+    hmr: {
+      clientPort: 5173,
+    },
+    host: "0.0.0.0", // true, // needed for the Docker Container port mapping to work
+    strictPort: true,
+    port: 5173, // you can replace this port with any port
   },
 })
